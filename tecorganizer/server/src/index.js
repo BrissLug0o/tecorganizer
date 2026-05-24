@@ -28,7 +28,7 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
 // Middlewares de seguridad
 app.use(helmet())
-app.use(cors({ origin: 'http://localhost:5173', credentials: true })) 
+app.use(cors({ origin: 'https://tecorganizer.vercel.app', credentials: true }))
 app.use(express.json())
 app.use(
   rateLimit({
