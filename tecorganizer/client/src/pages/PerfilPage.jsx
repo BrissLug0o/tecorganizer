@@ -36,7 +36,7 @@ export default function PerfilPage() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token')
-        const res = await fetch('http://localhost:3000/api/stats', {
+        const res = await fetch('${BASE_URL}/api/stats', {
           headers: { Authorization: `Bearer ${token}` },
         })
         if (res.ok) {
@@ -58,7 +58,7 @@ export default function PerfilPage() {
         <div className="w-20 h-20 rounded-full bg-accent/20 mx-auto flex items-center justify-center mb-3 overflow-hidden">
           {user?.profilePic ? (
             <img
-              src={`http://localhost:3000${user.profilePic}`}
+              src={`${BASE_URL}${user.profilePic}`}
               alt="Perfil"
               className="w-full h-full object-cover"
             />

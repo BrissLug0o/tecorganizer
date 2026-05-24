@@ -84,7 +84,7 @@ export default function EditProfileModal({ isOpen, onClose }) {
         <div className="flex items-center gap-4 mb-4">
           <div className="relative w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center overflow-hidden">
             {profilePic ? (
-              <img src={`http://localhost:3000${profilePic}`} alt="Perfil" className="w-full h-full object-cover" />
+              <img src={`${BASE_URL}${profilePic}`} alt="Perfil" className="w-full h-full object-cover" />
             ) : (
               <span className="text-2xl">👤</span>
             )}

@@ -112,7 +112,7 @@ export default function RachaPage() {
         const token = localStorage.getItem('token')
         const formData = new FormData()
         formData.append('evidence', evidenceFile)
-        const res = await fetch('http://localhost:3000/api/study/upload-evidence', {
+        const res = await fetch('${BASE_URL}/api/study/upload-evidence', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
@@ -172,7 +172,7 @@ export default function RachaPage() {
     setZoomLevel(prev => prev === 1 ? 2 : 1)
   }
   const handleDownload = (url) => {
-    window.open(`http://localhost:3000${url}`, '_blank')
+    window.open(`${BASE_URL}${url}`, '_blank')
   }
 
   const currentMethod = methods.find(m => m.id === selectedMethod)
@@ -311,7 +311,7 @@ export default function RachaPage() {
                 {item.evidenceUrl ? (
                   <div className="cursor-pointer" onClick={() => openPreview(item)}>
                     <img
-                      src={`http://localhost:3000${item.evidenceUrl}`}
+                      src={`${BASE_URL}${item.evidenceUrl}`}
                       alt="Evidencia"
                       className="w-full h-24 object-cover rounded-xl border border-[var(--color-border)]"
                       onError={(e) => { e.target.style.display = 'none' }}
@@ -342,7 +342,7 @@ export default function RachaPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={closePreview}>
           <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>
             <img
-              src={`http://localhost:3000${previewEvidencia.evidenceUrl}`}
+              src={`${BASE_URL}${previewEvidencia.evidenceUrl}`}
               alt="Vista previa"
               className="max-w-full max-h-[80vh] object-contain rounded-xl cursor-zoom-in"
               style={{ transform: `scale(${zoomLevel})`, transition: 'transform 0.2s ease-in-out' }}

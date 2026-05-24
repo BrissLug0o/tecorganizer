@@ -24,7 +24,7 @@ export default function Header() {
       >
         {user?.profilePic ? (
           <img
-            src={`http://localhost:3000${user.profilePic}`}
+            src={`${BASE_URL}${user.profilePic}`}
             alt="Perfil"
             className="w-6 h-6 rounded-full object-cover"
           />
