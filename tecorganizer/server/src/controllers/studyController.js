@@ -2,10 +2,9 @@ import prisma from '../prisma.js'
 import multer from 'multer'
 import path from 'path'
 
-// Configuración de multer para evidencias (SOLO IMÁGENES)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/')
+    cb(null, '/tmp/uploads')  // Render permite escribir aquí
   },
   filename: (req, file, cb) => {
     const unique = 'evidence-' + Date.now() + '-' + Math.round(Math.random() * 1e9)
@@ -13,16 +12,7 @@ const storage = multer.diskStorage({
   },
 })
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true)
-  } else {
-    cb(new Error('Solo se permiten imágenes'), false)
-  }
-}
-
-export const upload = multer({ storage, fileFilter })
+export const upload = multer({ storage })
 
 export const start = async (req, res) => {
   res.json({ message: 'Sesión iniciada', timestamp: new Date() })
@@ -37,10 +27,9 @@ export const complete = async (req, res) => {
         method,
         duration,
         evidenceUrl,
-        questions: req.body.questions || null
-      }
+      },
     })
-    // Lógica de racha
+    // Lógica de racha (sin cambios)
     const user = await prisma.user.findUnique({ where: { id: req.userId } })
     const today = new Date()
     const last = user.lastStudyDate ? new Date(user.lastStudyDate) : null
@@ -57,11 +46,7 @@ export const complete = async (req, res) => {
     const maxStreak = Math.max(user.maxStreak, newStreak)
     const updatedUser = await prisma.user.update({
       where: { id: req.userId },
-      data: {
-        studyStreak: newStreak,
-        maxStreak,
-        lastStudyDate: today,
-      },
+      data: { studyStreak: newStreak, maxStreak, lastStudyDate: today },
     })
     res.status(201).json({ session, user: updatedUser })
   } catch (error) {
@@ -81,20 +66,7 @@ export const history = async (req, res) => {
   }
 }
 
-// Nuevo endpoint para subir evidencia de estudio
-export const uploadEvidence = async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No se proporcionó archivo' })
-    }
-    const url = `/uploads/${req.file.filename}`
-    res.json({ url })
-  } catch (error) {
-    res.status(500).json({ error: 'Error al subir la evidencia' })
-  }
-}
-
- export const getByMethod = async (req, res) => {
+export const getByMethod = async (req, res) => {
   try {
     const { method } = req.params
     const sessions = await prisma.studySession.findMany({
@@ -105,5 +77,18 @@ export const uploadEvidence = async (req, res) => {
     res.json(sessions)
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener evidencias' })
+  }
+}
+
+export const uploadEvidence = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No se proporcionó archivo' })
+    }
+    // La ruta será /uploads/evidence-xxx.jpg, pero los archivos estarán en /tmp/uploads
+    const url = `/uploads/${req.file.filename}`
+    res.json({ url })
+  } catch (error) {
+    res.status(500).json({ error: 'Error al subir la evidencia' })
   }
 }

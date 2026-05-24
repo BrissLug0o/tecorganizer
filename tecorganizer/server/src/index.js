@@ -14,6 +14,7 @@ import gradeRoutes from './routes/grades.js'
 import studyRoutes from './routes/study.js'
 import eventRoutes from './routes/events.js'
 import statsRoutes from './routes/stats.js'
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -23,6 +24,9 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
+fs.mkdirSync('/tmp/uploads', { recursive: true })
+
+app.use('/uploads', express.static('/tmp/uploads'))
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
 app.use(
