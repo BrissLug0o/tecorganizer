@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  password     String
+  profilePic   String?
+  career       String?
+  theme        String    @default("light")
+  accentColor  String    @default("#4A90E2")
+  studyStreak  Int       @default(0)
+  maxStreak    Int       @default(0)
+  lastStudyDate DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  classes       Class[]
+  studySessions StudySession[]
+  events        Event[]
+}
+
+model Class {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  image       String?
+  syllabusUrl String?
+  createdAt   DateTime @default(now())
+
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks  Task[]
+  notes  Note[]
+  apuntes Apunte[]
+  grades Grade[]
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  classId     String
+  title       String
+  description String?
+  dueDate     DateTime
+  completed   Boolean  @default(false)
+  score       Float?
+  createdAt   DateTime @default(now())
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  classId   String
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+}
+
+model Apunte {
+  id        String   @id @default(uuid())
+  classId   String
+  imageUrl  String
+  createdAt DateTime @default(now())
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+}
+
+model Grade {
+  id      String @id @default(uuid())
+  classId String
+  name    String
+  score   Float
+  weight  Float?
+  examDate  DateTime?
+  createdAt DateTime @default(now())
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+}
+
+model StudySession {
+  id          String   @id @default(uuid())
+  userId      String
+  method      String
+  duration    Int
+  evidenceUrl String?
+  questions   String?   // ← JSON con preguntas/respuestas para Active Recall
+  completedAt DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  emoji       String?
+  eventDate   DateTime
+  eventTime   String?
+  notify      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

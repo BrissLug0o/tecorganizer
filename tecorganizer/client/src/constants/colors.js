@@ -1,0 +1,67 @@
+export const colorPalettes = [
+  {
+    category: 'Pasteles',
+    colors: [
+      { name: 'Rosa pastel', hex: '#FFB3BA' },
+      { name: 'Melocotón', hex: '#FFDFBA' },
+      { name: 'Menta', hex: '#B9F5D8' },
+      { name: 'Lavanda', hex: '#E6D0F2' },
+      { name: 'Azul cielo', hex: '#C9E4FF' },
+      { name: 'Amarillo suave', hex: '#FFF1B0' },
+      { name: 'Lila', hex: '#F0D0E0' },
+      { name: 'Verde agua', hex: '#B5EAD7' },
+    ],
+  },
+  {
+    category: 'Neones',
+    colors: [
+      { name: 'Rosa neón', hex: '#FF1493' },
+      { name: 'Naranja neón', hex: '#FF4500' },
+      { name: 'Amarillo neón', hex: '#FFFF00' },
+      { name: 'Verde neón', hex: '#39FF14' },
+      { name: 'Cian neón', hex: '#00FFFF' },
+      { name: 'Magenta neón', hex: '#FF00FF' },
+      { name: 'Lima neón', hex: '#BFFF00' },
+      { name: 'Naranja rojizo', hex: '#FF5E00' },
+    ],
+  },
+  {
+    category: 'Cálidos',
+    colors: [
+      { name: 'Rojo', hex: '#FF6B6B' },
+      { name: 'Naranja', hex: '#FF8C42' },
+      { name: 'Ámbar', hex: '#FFC300' },
+      { name: 'Oro', hex: '#FFD700' },
+      { name: 'Coral', hex: '#FF7F50' },
+      { name: 'Salmón', hex: '#FA8072' },
+      { name: 'Tomate', hex: '#FF6347' },
+      { name: 'Terracota', hex: '#E2725B' },
+    ],
+  },
+  {
+    category: 'Fríos',
+    colors: [
+      { name: 'Azul acero', hex: '#4682B4' },
+      { name: 'Azul marino', hex: '#2E4A7F' },
+      { name: 'Turquesa', hex: '#40E0D0' },
+      { name: 'Verde pino', hex: '#01796F' },
+      { name: 'Azul hielo', hex: '#A0D2DB' },
+      { name: 'Violeta', hex: '#8B00FF' },
+      { name: 'Índigo', hex: '#4B0082' },
+      { name: 'Azul real', hex: '#4169E1' },
+    ],
+  },
+  {
+    category: 'Terracota',
+    colors: [
+      { name: 'Terracota', hex: '#E2725B' },
+      { name: 'Arena', hex: '#C2B280' },
+      { name: 'Ocre', hex: '#CC7722' },
+      { name: 'Siena', hex: '#A0522D' },
+      { name: 'Caqui', hex: '#C3B091' },
+      { name: 'Barro', hex: '#8B4513' },
+      { name: 'Canela', hex: '#D2691E' },
+      { name: 'Tostado', hex: '#A0522D' },
+    ],
+  },
+]

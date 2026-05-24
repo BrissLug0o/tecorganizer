@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* =============================================
+   Variables de tema (claro por defecto)
+   ============================================= */
+@theme {
+  --color-accent: var(--accent);           /* ← apunta a la variable dinámica */
+  --color-accent-light: var(--accent-light);
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F5F5F5;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-border: #E5E5E5;
+}
+
+.dark {
+  --color-bg-primary: #121212;
+  --color-bg-secondary: #1E1E1E;
+  --color-text-primary: #E0E0E0;
+  --color-text-secondary: #A0A0A0;
+  --color-border: #2C2C2C;
+}
+
+/* Acento dinámico (se inyecta desde JS) */
+:root {
+  --accent: #4A90E2;
+  --accent-light: #8BB8F0;
+}
+/* =============================================
+   Animaciones personalizadas
+   ============================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.2s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s infinite;
+}
+
+/* Suavidad global */
+* {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+}
