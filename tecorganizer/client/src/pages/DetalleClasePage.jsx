@@ -13,7 +13,7 @@ import {
   Download,
   X,
 } from 'lucide-react'
-import { classes, tasks, notes, apuntes, grades } from '../services/api'
+import { classes, tasks, notes, apuntes, grades, UPLOADS_URL } from '../services/api'
 import Button from '../components/ui/Button'
 import Modal from '../components/ui/Modal'
 

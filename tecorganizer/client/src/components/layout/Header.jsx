@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, User } from 'lucide-react'
 import useStore from '../../store/useStore'
+import { UPLOADS_URL } from '../../services/api'
 
 export default function Header() {
   const user = useStore((s) => s.user)
@@ -18,15 +19,16 @@ export default function Header() {
 
       <h1 className="text-lg font-semibold">{user?.name || 'TecOrganizer'}</h1>
 
-      <Link
-        to="/perfil"
-        className="p-2 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors"
-      >
-{user?.profilePic ? (
-  <img src={`${UPLOADS_URL}${user.profilePic}`} alt="Perfil" className="w-6 h-6 rounded-full object-cover" />
-) : (
-  <User size={24} />
-)}
+      <Link to="/perfil" className="p-2 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors">
+        {user?.profilePic ? (
+          <img
+            src={`${UPLOADS_URL}${user.profilePic}`}
+            alt="Perfil"
+            className="w-6 h-6 rounded-full object-cover"
+          />
+        ) : (
+          <User size={24} />
+        )}
       </Link>
 
       {drawerOpen && (
@@ -35,29 +37,12 @@ export default function Header() {
           onClick={() => setDrawerOpen(false)}
         >
           <nav className="flex flex-col gap-3">
-            <Link
-              to="/perfil"
-              className="px-3 py-2 rounded-lg hover:bg-[var(--color-bg-primary)] transition-colors"
-              onClick={() => setDrawerOpen(false)}
-            >
-              Perfil
-            </Link>
-            <Link
-              to="/ajustes"
-              className="px-3 py-2 rounded-lg hover:bg-[var(--color-bg-primary)] transition-colors"
-              onClick={() => setDrawerOpen(false)}
-            >
-              Ajustes
-            </Link>
+            <Link to="/perfil" className="px-3 py-2 rounded-lg hover:bg-[var(--color-bg-primary)] transition-colors" onClick={() => setDrawerOpen(false)}>Perfil</Link>
+            <Link to="/ajustes" className="px-3 py-2 rounded-lg hover:bg-[var(--color-bg-primary)] transition-colors" onClick={() => setDrawerOpen(false)}>Ajustes</Link>
             <button
               className="text-left px-3 py-2 rounded-lg hover:bg-[var(--color-bg-primary)] transition-colors text-red-500"
-              onClick={() => {
-                useStore.getState().logout()
-                setDrawerOpen(false)
-              }}
-            >
-              Cerrar sesión
-            </button>
+              onClick={() => { useStore.getState().logout(); setDrawerOpen(false) }}
+            >Cerrar sesión</button>
           </nav>
         </div>
       )}

@@ -3,7 +3,7 @@ import {
   Flame, Clock, Upload, Play, Pause, BookOpen, Brain,
   GitBranch, PenTool, ChevronDown, ChevronUp, Download, X
 } from 'lucide-react'
-import { study } from '../services/api'
+import { study, BASE_URL, UPLOADS_URL } from '../services/api'
 import useStore from '../store/useStore'
 import Button from '../components/ui/Button'
 import Modal from '../components/ui/Modal'
