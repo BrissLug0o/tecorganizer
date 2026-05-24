@@ -23,15 +23,20 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
-// Servir archivos estáticos (imágenes, apuntes, etc.)
-app.use('/uploads', (req, res, next) => {
-  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
-  next()
-})
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
-// Middlewares de seguridad
-app.use(helmet())
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: {
+      directives: {
+        'default-src': ["'self'"],
+        'img-src': ["'self'", 'data:', 'blob:', 'https://tecorganizer-api.onrender.com'],
+        'connect-src': ["'self'", 'https://tecorganizer-api.onrender.com'],
+      },
+    },
+  })
+)
 app.use(cors({ origin: '*', credentials: true }))
 app.use(express.json())
 app.use(
