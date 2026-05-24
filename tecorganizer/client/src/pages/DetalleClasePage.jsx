@@ -191,7 +191,7 @@ export default function DetalleClasePage() {
     setZoomLevel(prev => prev === 1 ? 2 : 1)
   }
   const handleDownload = (url) => {
-    window.open(`${BASE_URL}${url}`, '_blank')
+    window.open(`${UPLOADS_URL}${url}`, '_blank')
   }
 
   // --- Calificaciones (exámenes) ---
@@ -398,7 +398,7 @@ export default function DetalleClasePage() {
               <div key={apunte.id} className="relative group">
                 <div onClick={() => openPreview(apunte)} className="cursor-pointer">
                   <img
-                    src={`${BASE_URL}${apunte.imageUrl}`}
+                    src={`${UPLOADS_URL}${apunte.imageUrl}`}
                     alt="Apunte"
                     className="w-full h-24 object-cover rounded-xl border border-[var(--color-border)]"
                     onError={(e) => {
@@ -458,7 +458,7 @@ export default function DetalleClasePage() {
             <>
               <div className="cursor-pointer" onClick={() => openPreview({ imageUrl: classItem.syllabusUrl })}>
                 <img
-                  src={`${BASE_URL}${classItem.syllabusUrl}`}
+                  src={`${UPLOADS_URL}${classItem.syllabusUrl}`}
                   alt="Temario"
                   className="w-full h-64 object-cover rounded-xl border border-[var(--color-border)] hover:shadow-md transition-shadow"
                 />
@@ -595,7 +595,7 @@ export default function DetalleClasePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={closePreview}>
           <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>
             <img
-              src={`${BASE_URL}${previewApunte.imageUrl}`}
+              src={`${UPLOADS_URL}${previewApunte.imageUrl}`}
               alt="Vista previa"
               className="max-w-full max-h-[80vh] object-contain rounded-xl cursor-zoom-in"
               style={{ transform: `scale(${zoomLevel})`, transition: 'transform 0.2s ease-in-out' }}

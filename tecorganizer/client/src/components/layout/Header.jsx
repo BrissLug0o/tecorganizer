@@ -22,15 +22,11 @@ export default function Header() {
         to="/perfil"
         className="p-2 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors"
       >
-        {user?.profilePic ? (
-          <img
-            src={`${BASE_URL}${user.profilePic}`}
-            alt="Perfil"
-            className="w-6 h-6 rounded-full object-cover"
-          />
-        ) : (
-          <User size={24} />
-        )}
+{user?.profilePic ? (
+  <img src={`${UPLOADS_URL}${user.profilePic}`} alt="Perfil" className="w-6 h-6 rounded-full object-cover" />
+) : (
+  <User size={24} />
+)}
       </Link>
 
       {drawerOpen && (
