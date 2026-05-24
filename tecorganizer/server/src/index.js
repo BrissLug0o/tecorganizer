@@ -52,6 +52,10 @@ app.get('/', (req, res) => {
   res.json({ message: 'API TecOrganizer funcionando' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`)
-})
+ if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`)
+  })
+}
+
+export default app
