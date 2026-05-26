@@ -73,6 +73,11 @@ export default function CalendarioPage() {
   const startDate = startOfWeek(monthStart, { weekStartsOn: 0 })
   const endDate = endOfWeek(monthEnd, { weekStartsOn: 0 })
 
+  const toLocalDate = (dateString) => {
+  const [year, month, day] = dateString.split('-').map(Number)
+  return new Date(year, month - 1, day)
+  }
+
   const days = []
   let day = startDate
   while (day <= endDate) {
@@ -84,7 +89,7 @@ export default function CalendarioPage() {
 
   // Eventos del día seleccionado
   const eventsOnSelected = filteredEvents.filter((ev) =>
-    isSameDay(parseISO(ev.eventDate), selectedDate)
+    isSameDay(toLocalDate(ev.eventDate), selectedDate)
   )
 
   // Próximos 7 días
@@ -92,7 +97,7 @@ export default function CalendarioPage() {
   const sevenDaysFromNow = addDays(today, 7)
   const upcomingEvents = filteredEvents
     .filter((ev) => {
-      const date = parseISO(ev.eventDate)
+      const date = toLocalDate(ev.eventDate)
       return date >= today && date <= sevenDaysFromNow
     })
     .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
@@ -100,7 +105,7 @@ export default function CalendarioPage() {
   // Agrupar próximos eventos por día
   const groupedUpcoming = {}
   upcomingEvents.forEach((ev) => {
-    const dateKey = format(parseISO(ev.eventDate), 'yyyy-MM-dd')
+    const dateKey = format(toLocalDate(ev.eventDate), 'yyyy-MM-dd')
     if (!groupedUpcoming[dateKey]) groupedUpcoming[dateKey] = []
     groupedUpcoming[dateKey].push(ev)
   })
@@ -124,7 +129,7 @@ export default function CalendarioPage() {
     setEditingEvent(ev)
     setFormData({
       title: ev.title,
-      eventDate: format(parseISO(ev.eventDate), 'yyyy-MM-dd'),
+      eventDate: format(toLocalDate(ev.eventDate), 'yyyy-MM-dd'),
       eventTime: ev.eventTime || '',
       description: ev.description || '',
       emoji: ev.emoji || '',
@@ -187,7 +192,7 @@ export default function CalendarioPage() {
             const isCurrentMonth = isSameMonth(d, currentMonth)
             const isSelected = isSameDay(d, selectedDate)
             const hasEvent = filteredEvents.some((ev) =>
-              isSameDay(parseISO(ev.eventDate), d)
+              isSameDay(toLocalDate(ev.eventDate), d)
             )
             const isTodayDate = isToday(d)
 
