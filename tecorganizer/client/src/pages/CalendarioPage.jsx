@@ -92,7 +92,7 @@ export default function CalendarioPage() {
     isSameDay(toLocalDate(ev.eventDate), selectedDate)
   )
 
-  // Próximos 7 días
+  // Próximos 7 días sdhbfjshdfjhsjdfh
   const today = new Date()
   const sevenDaysFromNow = addDays(today, 7)
   const upcomingEvents = filteredEvents
