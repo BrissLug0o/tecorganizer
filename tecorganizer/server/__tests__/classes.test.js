@@ -7,7 +7,7 @@ let token
 let classId
 
 beforeAll(async () => {
-  // Limpiar usuario de prueba
+
   await prisma.user.deleteMany({ where: { email: 'class@test.com' } })
 
   const res = await request

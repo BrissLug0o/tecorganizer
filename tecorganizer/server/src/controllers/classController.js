@@ -2,7 +2,6 @@ import prisma from '../prisma.js'
 import multer from 'multer'
 import path from 'path'
 
-// Configuración de multer para temario (SOLO IMÁGENES)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/')
@@ -87,7 +86,6 @@ export const remove = async (req, res) => {
   }
 }
 
-// Subir o actualizar temario (solo imagen)
 export const updateSyllabus = async (req, res) => {
   try {
     const { id } = req.params
@@ -105,7 +103,6 @@ export const updateSyllabus = async (req, res) => {
   }
 }
 
-// Eliminar temario
 export const removeSyllabus = async (req, res) => {
   try {
     const { id } = req.params

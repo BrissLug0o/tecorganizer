@@ -50,7 +50,6 @@ app.use(
   })
 )
 
-// Rutas de la API
 app.use('/api/auth', authRoutes)
 app.use('/api/classes', classRoutes)
 app.use('/api/tasks', taskRoutes)

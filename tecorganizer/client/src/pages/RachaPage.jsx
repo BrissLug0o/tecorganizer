@@ -66,7 +66,6 @@ export default function RachaPage() {
     }
   }, [user])
 
-  // Temporizador
   useEffect(() => {
     let interval
     if (timerRunning && timeLeft > 0) {
@@ -135,11 +134,9 @@ export default function RachaPage() {
       const newStreak = result.user?.studyStreak ?? streak
       const newMax = result.user?.maxStreak ?? record
 
-      // Actualizar estado local
       setStreak(newStreak)
       setRecord(newMax)
 
-      // Actualizar el store global (¡esta es la clave!)
       updateUserRacha(newStreak, newMax)
 
       setShowUpload(false)
@@ -179,7 +176,7 @@ export default function RachaPage() {
 
   return (
     <div className="text-center animate-fade-in">
-      {/* Racha */}
+
       <div className="bg-[var(--color-bg-secondary)] rounded-2xl p-6 mb-6 animate-fade-in-scale">
         <div className="flex items-center justify-center gap-3">
           <Flame size={48} className="text-accent" />
@@ -189,7 +186,6 @@ export default function RachaPage() {
         <p className="text-sm text-[var(--color-text-secondary)] mt-1">Récord: {record} días</p>
       </div>
 
-      {/* Método de estudio */}
       <h3 className="font-semibold text-left mb-3">Elige método de estudio</h3>
       <div className="flex gap-3 overflow-x-auto pb-2 mb-4">
         {methods.map((m, idx) => (
@@ -209,7 +205,6 @@ export default function RachaPage() {
         </p>
       )}
 
-      {/* Botón iniciar / temporizador / formulario Active Recall */}
       {!timerRunning && !showQuestionsForm && (
         <Button onClick={handleStart} className="w-full mb-6" disabled={!selectedMethod}>
           <Play size={18} className="mr-2" /> Iniciar sesión de estudio
@@ -229,7 +224,6 @@ export default function RachaPage() {
         </div>
       )}
 
-      {/* Formulario Active Recall */}
       {showQuestionsForm && (
         <div className="bg-[var(--color-bg-secondary)] rounded-2xl p-6 mb-6 animate-fade-in-scale text-left">
           <h4 className="font-semibold mb-3">Tus preguntas y respuestas</h4>
@@ -263,7 +257,6 @@ export default function RachaPage() {
         </div>
       )}
 
-      {/* Modal subir evidencia (solo imágenes) */}
       <Modal isOpen={showUpload} onClose={() => setShowUpload(false)} title="¡Sesión completada!">
         <p className="text-sm text-[var(--color-text-secondary)] mb-4">
           {currentMethod?.needsEvidence ? 'Sube una foto de tu trabajo' : 'Confirma que has completado la sesión'}
@@ -287,7 +280,6 @@ export default function RachaPage() {
         </Button>
       </Modal>
 
-      {/* Historial de evidencias */}
       <div className="mt-8">
         <button onClick={() => setHistoryOpen(!historyOpen)}
           className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-accent transition-colors mb-2">
@@ -337,7 +329,6 @@ export default function RachaPage() {
         ) : null}
       </div>
 
-      {/* Modal vista previa de evidencia (zoom) */}
       {previewEvidencia && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={closePreview}>
           <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>

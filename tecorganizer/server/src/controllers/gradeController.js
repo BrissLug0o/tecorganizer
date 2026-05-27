@@ -4,12 +4,10 @@ export const create = async (req, res) => {
   try {
     const { classId, name, score, weight, examDate } = req.body
 
-    // Validar ponderación (0-1)
     if (weight !== undefined && (isNaN(weight) || weight < 0 || weight > 1)) {
       return res.status(400).json({ error: 'La ponderación debe estar entre 0 y 1' })
     }
 
-    // Validar y construir la fecha correctamente
     let date = null
     if (examDate) {
       date = new Date(examDate + 'T00:00:00')
@@ -26,7 +24,7 @@ export const create = async (req, res) => {
         connect: { id: classId },
       },
     }
-    // Solo incluir score si se proporciona
+
     if (score !== undefined && score !== null) {
       data.score = score
     } else {

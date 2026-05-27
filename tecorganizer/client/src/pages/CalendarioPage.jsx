@@ -61,13 +61,11 @@ export default function CalendarioPage() {
     ev.title.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  // Navegación del mes
   const nextMonth = () =>
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
   const prevMonth = () =>
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))
 
-  // Construir cuadrícula del mes
   const monthStart = startOfMonth(currentMonth)
   const monthEnd = endOfMonth(monthStart)
   const startDate = startOfWeek(monthStart, { weekStartsOn: 0 })
@@ -87,12 +85,10 @@ export default function CalendarioPage() {
 
   const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
-  // Eventos del día seleccionado
   const eventsOnSelected = filteredEvents.filter((ev) =>
     isSameDay(toLocalDate(ev.eventDate), selectedDate)
   )
 
-  // Próximos 7 días sdhbfjshdfjhsjdfh
   const today = new Date()
   const sevenDaysFromNow = addDays(today, 7)
   const upcomingEvents = filteredEvents
@@ -102,7 +98,6 @@ export default function CalendarioPage() {
     })
     .sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate))
 
-  // Agrupar próximos eventos por día
   const groupedUpcoming = {}
   upcomingEvents.forEach((ev) => {
     const dateKey = format(toLocalDate(ev.eventDate), 'yyyy-MM-dd')
@@ -110,7 +105,6 @@ export default function CalendarioPage() {
     groupedUpcoming[dateKey].push(ev)
   })
 
-  // Abrir modal para crear
   const openCreateModal = () => {
     setEditingEvent(null)
     setFormData({
@@ -124,7 +118,6 @@ export default function CalendarioPage() {
     setModalOpen(true)
   }
 
-  // Abrir modal para editar
   const openEditModal = (ev) => {
     setEditingEvent(ev)
     setFormData({
@@ -138,7 +131,7 @@ export default function CalendarioPage() {
     setModalOpen(true)
   }
 
-  // Guardar (crear o actualizar)
+
   const handleSave = async () => {
     if (!formData.title.trim()) return
     try {
@@ -154,7 +147,6 @@ export default function CalendarioPage() {
     }
   }
 
-  // Eliminar evento
   const handleDelete = async (id) => {
     if (!confirm('¿Eliminar este evento?')) return
     try {

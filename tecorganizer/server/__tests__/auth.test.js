@@ -6,7 +6,7 @@ const request = supertest(app)
 let token
 
 beforeAll(async () => {
-  // Limpiar usuario de prueba antes de registrarlo
+
   await prisma.user.deleteMany({ where: { email: 'test@test.com' } })
 })
 

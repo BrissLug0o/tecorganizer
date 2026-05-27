@@ -1,7 +1,7 @@
 import prisma from './src/prisma.js'
 
 beforeAll(async () => {
-  // Limpiar tablas en orden (por las relaciones)
+
   await prisma.event.deleteMany()
   await prisma.studySession.deleteMany()
   await prisma.grade.deleteMany()

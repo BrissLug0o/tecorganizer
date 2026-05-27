@@ -1,8 +1,4 @@
 @import "tailwindcss";
-
-/* =============================================
-   Variables de tema (claro por defecto)
-   ============================================= */
 @theme {
   --color-accent: var(--accent);           /* ← apunta a la variable dinámica */
   --color-accent-light: var(--accent-light);
@@ -26,9 +22,6 @@
   --accent: #4A90E2;
   --accent-light: #8BB8F0;
 }
-/* =============================================
-   Animaciones personalizadas
-   ============================================= */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

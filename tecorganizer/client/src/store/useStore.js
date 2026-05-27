@@ -7,7 +7,6 @@ const useStore = create((set) => ({
   isAuthLoading: false,
   authError: null,
 
-  // Acciones de autenticación
   login: async (email, password) => {
     set({ isAuthLoading: true, authError: null })
     try {
@@ -110,7 +109,6 @@ const useStore = create((set) => ({
     }
   },
 
-  // Actualizar SOLO la racha (se llama desde RachaPage tras completar sesión)
   updateUserRacha: (studyStreak, maxStreak) => {
     set((state) => ({
       user: state.user ? { ...state.user, studyStreak, maxStreak } : null,

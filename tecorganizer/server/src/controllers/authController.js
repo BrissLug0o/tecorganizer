@@ -18,7 +18,6 @@ export const register = async (req, res) => {
   try {
     const { name, email, password, career } = req.body
 
-    // Validación de contraseña
     if (!password || password.length < 6) {
       return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' })
     }

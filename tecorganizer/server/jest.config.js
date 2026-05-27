@@ -4,5 +4,5 @@ export default {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
-  transformIgnorePatterns: ['node_modules/(?!(@prisma)/)'],  // ← nueva línea
+  transformIgnorePatterns: ['node_modules/(?!(@prisma)/)'],
 }

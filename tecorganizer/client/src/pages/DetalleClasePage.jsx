@@ -28,7 +28,6 @@ export default function DetalleClasePage() {
   const [apunteList, setApunteList] = useState([])
   const [gradeList, setGradeList] = useState([])
 
-  // Modal tarea
   const [taskModalOpen, setTaskModalOpen] = useState(false)
   const [editingTask, setEditingTask] = useState(null)
   const [taskForm, setTaskForm] = useState({
@@ -40,12 +39,10 @@ export default function DetalleClasePage() {
   const [taskError, setTaskError] = useState('')
   const [showCompleted, setShowCompleted] = useState(true)
 
-  // Modal nota
   const [noteModalOpen, setNoteModalOpen] = useState(false)
   const [editingNote, setEditingNote] = useState(null)
   const [noteForm, setNoteForm] = useState({ title: '', content: '' })
 
-  // Modal calificación (crear examen)
   const [gradeModalOpen, setGradeModalOpen] = useState(false)
   const [gradeForm, setGradeForm] = useState({
     name: '',
@@ -54,15 +51,13 @@ export default function DetalleClasePage() {
   })
   const [gradeError, setGradeError] = useState('')
 
-  // Modal para ingresar calificación (después de creado el examen)
   const [scoreModalOpen, setScoreModalOpen] = useState(false)
   const [selectedGrade, setSelectedGrade] = useState(null)
   const [scoreInput, setScoreInput] = useState('')
 
-  // Modal temario
   const [syllabusModalOpen, setSyllabusModalOpen] = useState(false)
 
-  // Vista previa de apuntes
+
   const [previewApunte, setPreviewApunte] = useState(null)
   const [zoomLevel, setZoomLevel] = useState(1)
 
@@ -82,7 +77,7 @@ export default function DetalleClasePage() {
   const loadApuntes = async () => { const data = await apuntes.getByClass(id); setApunteList(data) }
   const loadGrades = async () => { const data = await grades.getByClass(id); setGradeList(data) }
 
-  // Tareas
+
   const toggleTask = async (taskId, completed) => {
     setTaskList(prev =>
       prev.map(t => (t.id === taskId ? { ...t, completed: !completed } : t))
@@ -148,7 +143,7 @@ export default function DetalleClasePage() {
     if (confirm('¿Eliminar tarea?')) { await tasks.delete(taskId); loadTasks() }
   }
 
-  // Notas
+
   const openNoteModal = (note = null) => {
     setEditingNote(note)
     setNoteForm(note ? { title: note.title, content: note.content } : { title: '', content: '' })
@@ -165,7 +160,6 @@ export default function DetalleClasePage() {
     if (confirm('¿Eliminar nota?')) { await notes.delete(noteId); loadNotes() }
   }
 
-  // Apuntes
   const handleFileUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -178,7 +172,6 @@ export default function DetalleClasePage() {
     if (confirm('¿Eliminar apunte?')) { await apuntes.delete(apunteId); loadApuntes() }
   }
 
-  // Vista previa de apuntes
   const openPreview = (apunte) => {
     setPreviewApunte(apunte)
     setZoomLevel(1)
@@ -194,7 +187,6 @@ export default function DetalleClasePage() {
     window.open(`${UPLOADS_URL}${url}`, '_blank')
   }
 
-  // --- Calificaciones (exámenes) ---
   const openGradeCreateModal = () => {
     setGradeError('')
     setGradeForm({ name: '', weight: '', examDate: '' })
@@ -270,7 +262,6 @@ export default function DetalleClasePage() {
     return totalWeight > 0 ? (weightedSum / totalWeight).toFixed(2) : null
   }
 
-  // Temario
   const handleSyllabusUpload = async (file) => {
     if (!file) return
     try {
@@ -295,7 +286,7 @@ export default function DetalleClasePage() {
 
   return (
     <div className="animate-fade-in-scale">
-      {/* Cabecera */}
+
       <div className="flex items-center gap-3 mb-4">
         <button onClick={() => navigate(-1)} className="p-1 hover:scale-110 transition-transform">
           <ArrowLeft size={24} />
@@ -307,7 +298,7 @@ export default function DetalleClasePage() {
         {classItem.name}
       </div>
 
-      {/* Subpestañas */}
+
       <div className="flex gap-2 border-b border-[var(--color-border)] mb-4 overflow-x-auto">
         {tabs.map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
@@ -318,7 +309,7 @@ export default function DetalleClasePage() {
         ))}
       </div>
 
-      {/* Tareas */}
+
       {activeTab === 'tareas' && (
         <div className="flex flex-col gap-3">
           {pendingTasks.map((task, idx) => (
@@ -390,7 +381,7 @@ export default function DetalleClasePage() {
         </div>
       )}
 
-      {/* Apuntes */}
+
       {activeTab === 'apuntes' && (
         <div className="animate-fade-in">
           <div className="grid grid-cols-3 gap-3 mb-4">
@@ -423,7 +414,7 @@ export default function DetalleClasePage() {
         </div>
       )}
 
-      {/* Notas */}
+
       {activeTab === 'notas' && (
         <div className="animate-fade-in">
           {noteList.map((note, idx) => (
@@ -451,7 +442,7 @@ export default function DetalleClasePage() {
         </div>
       )}
 
-      {/* Temario */}
+
       {activeTab === 'temario' && (
         <div className="animate-fade-in space-y-4">
           {classItem.syllabusUrl ? (
@@ -510,7 +501,7 @@ export default function DetalleClasePage() {
         </div>
       )}
 
-      {/* Calificaciones */}
+
       {activeTab === 'calificaciones' && (
         <div className="animate-fade-in">
           <table className="w-full text-left text-sm">
@@ -576,7 +567,7 @@ export default function DetalleClasePage() {
             </div>
           </Modal>
 
-          {/* Modal para ingresar calificación */}
+
           <Modal isOpen={scoreModalOpen} onClose={() => setScoreModalOpen(false)} title={`Calificar: ${selectedGrade?.name}`}>
             <p className="text-sm text-[var(--color-text-secondary)] mb-2">
               Fecha: {selectedGrade?.examDate ? new Date(selectedGrade.examDate).toLocaleDateString() : ''}
@@ -590,7 +581,6 @@ export default function DetalleClasePage() {
         </div>
       )}
 
-      {/* Modal vista previa de apuntes */}
       {previewApunte && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={closePreview}>
           <div className="relative max-w-4xl max-h-full" onClick={(e) => e.stopPropagation()}>

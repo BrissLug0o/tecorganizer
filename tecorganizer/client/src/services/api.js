@@ -21,7 +21,6 @@ async function request(endpoint, options = {}) {
   return data
 }
 
-// Autenticación
 export const auth = {
   register: (userData) => request('/auth/register', { method: 'POST', body: JSON.stringify(userData) }),
   login: (credentials) => request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
@@ -34,7 +33,6 @@ export const auth = {
   },
 }
 
-// Clases
 export const classes = {
   getAll: () => request('/classes'),
   getById: (id) => request(`/classes/${id}`),
@@ -49,7 +47,6 @@ export const classes = {
   deleteSyllabus: (id) => request(`/classes/${id}/syllabus`, { method: 'DELETE' }),
 }
 
-// Tareas
 export const tasks = {
   getByClass: (classId) => request(`/tasks/class/${classId}`),
   create: (data) => request('/tasks', { method: 'POST', body: JSON.stringify(data) }),
@@ -57,7 +54,6 @@ export const tasks = {
   delete: (id) => request(`/tasks/${id}`, { method: 'DELETE' }),
 }
 
-// Notas
 export const notes = {
   getByClass: (classId) => request(`/notes/class/${classId}`),
   create: (data) => request('/notes', { method: 'POST', body: JSON.stringify(data) }),
@@ -65,7 +61,6 @@ export const notes = {
   delete: (id) => request(`/notes/${id}`, { method: 'DELETE' }),
 }
 
-// Apuntes (solo imágenes)
 export const apuntes = {
   getByClass: (classId) => request(`/apuntes/class/${classId}`),
   upload: (classId, file) => {
@@ -77,7 +72,6 @@ export const apuntes = {
   delete: (id) => request(`/apuntes/${id}`, { method: 'DELETE' }),
 }
 
-// Calificaciones
 export const grades = {
   getByClass: (classId) => request(`/grades/class/${classId}`),
   create: (data) => request('/grades', { method: 'POST', body: JSON.stringify(data) }),
@@ -85,14 +79,12 @@ export const grades = {
   delete: (id) => request(`/grades/${id}`, { method: 'DELETE' }),
 }
 
-// Estudio
 export const study = {
   complete: (data) => request('/study/complete', { method: 'POST', body: JSON.stringify(data) }),
   history: () => request('/study/history'),
   getByMethod: (method) => request(`/study/history/${method}`),
 }
 
-// Eventos
 export const events = {
   getAll: () => request('/events'),
   create: (data) => request('/events', { method: 'POST', body: JSON.stringify(data) }),
@@ -100,7 +92,6 @@ export const events = {
   delete: (id) => request(`/events/${id}`, { method: 'DELETE' }),
 }
 
-// Estadísticas
 export const stats = {
   get: () => request('/stats'),
 }

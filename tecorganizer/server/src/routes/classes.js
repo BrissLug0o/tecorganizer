@@ -13,7 +13,7 @@ import {
 
 const router = Router()
 
-router.use(auth) // Todas las rutas requieren token
+router.use(auth)
 
 router.post('/', create)
 router.get('/', getAll)
@@ -21,7 +21,6 @@ router.get('/:id', getById)
 router.put('/:id', update)
 router.delete('/:id', remove)
 
-// Rutas del temario (solo imágenes)
 router.put('/:id/syllabus', uploadSyllabus.single('syllabus'), updateSyllabus)
 router.delete('/:id/syllabus', removeSyllabus)
 

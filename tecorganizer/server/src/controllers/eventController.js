@@ -30,7 +30,6 @@ export const update = async (req, res) => {
     const { id } = req.params
     const { title, description, emoji, eventDate, eventTime, notify } = req.body
 
-    // Solo incluir los campos que realmente vienen en el body
     const data = {}
     if (title !== undefined) data.title = title
     if (description !== undefined) data.description = description

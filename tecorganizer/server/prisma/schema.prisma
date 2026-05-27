@@ -92,7 +92,7 @@ model StudySession {
   method      String
   duration    Int
   evidenceUrl String?
-  questions   String?   // ← JSON con preguntas/respuestas para Active Recall
+  questions   String?
   completedAt DateTime @default(now())
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

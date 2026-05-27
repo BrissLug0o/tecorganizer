@@ -4,7 +4,7 @@ import path from 'path'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '/tmp/uploads')  // Render permite escribir aquí
+    cb(null, '/tmp/uploads') 
   },
   filename: (req, file, cb) => {
     const unique = 'evidence-' + Date.now() + '-' + Math.round(Math.random() * 1e9)
@@ -29,7 +29,7 @@ export const complete = async (req, res) => {
         evidenceUrl,
       },
     })
-    // Lógica de racha (sin cambios)
+
     const user = await prisma.user.findUnique({ where: { id: req.userId } })
     const today = new Date()
     const last = user.lastStudyDate ? new Date(user.lastStudyDate) : null

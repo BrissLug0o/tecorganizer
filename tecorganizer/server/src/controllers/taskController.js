@@ -33,7 +33,6 @@ export const update = async (req, res) => {
     const { id } = req.params
     const { title, description, dueDate, completed, score } = req.body
 
-    // Construir objeto solo con los campos proporcionados
     const data = {}
     if (title !== undefined) data.title = title
     if (description !== undefined) data.description = description

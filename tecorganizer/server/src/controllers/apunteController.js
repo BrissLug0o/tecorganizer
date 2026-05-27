@@ -2,7 +2,6 @@ import prisma from '../prisma.js'
 import multer from 'multer'
 import path from 'path'
 
-// Configuración de multer para guardar en /uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/')

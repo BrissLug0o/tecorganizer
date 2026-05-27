@@ -4,10 +4,8 @@ export const getStats = async (req, res) => {
   try {
     const userId = req.userId
 
-    // Total de clases
     const totalClasses = await prisma.class.count({ where: { userId } })
 
-    // Total horas de estudio (suma de duraciones en minutos)
     const studySessions = await prisma.studySession.findMany({
       where: { userId },
       select: { duration: true },
@@ -15,7 +13,6 @@ export const getStats = async (req, res) => {
     const totalStudyMinutes = studySessions.reduce((sum, s) => sum + s.duration, 0)
     const totalStudyHours = Math.round((totalStudyMinutes / 60) * 10) / 10 // redondeado a 1 decimal
 
-    // Promedio general (promedio de promedios de cada clase)
     const classes = await prisma.class.findMany({
       where: { userId },
       include: { grades: true },

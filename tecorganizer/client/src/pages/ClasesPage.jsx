@@ -154,7 +154,6 @@ export default function ClasesPage() {
         </div>
       )}
 
-      {/* FAB */}
       <button
         onClick={openCreateModal}
         className="fixed bottom-6 right-6 w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:opacity-90 hover:scale-110 transition-all duration-300 z-10"
@@ -162,7 +161,6 @@ export default function ClasesPage() {
         <Plus size={28} />
       </button>
 
-      {/* Modal crear/editar clase */}
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}

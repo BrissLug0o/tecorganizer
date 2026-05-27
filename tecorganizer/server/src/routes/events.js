@@ -7,7 +7,7 @@ router.use(auth)
 
 router.post('/', create)
 router.get('/', getAll)
-router.put('/:id', update)        // ← nueva ruta
+router.put('/:id', update)
 router.delete('/:id', remove)
 
 export default router
